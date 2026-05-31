@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ייבוא CSV | RECYCLES</title>
+    <link rel="stylesheet" href="/assets/styles.css">
+    <link rel="stylesheet" href="/tools/import.css">
+    <script src="/tools/import.js" defer></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="/reports/">
+        <img src="/assets/logos/recycles-logo.png" alt="RECYCLES">
+      </a>
+      <a class="button secondary" href="/reports/">חזרה לדוחות</a>
+    </header>
+
+    <main class="import-layout">
+      <section class="admin-hero">
+        <p class="eyebrow">כלי ניהול פנימי</p>
+        <h1>ייבוא נתוני CSV</h1>
+      </section>
+
+      <section class="section">
+        <div class="section-heading">
+          <span class="section-number">01</span>
+          <h2>לאיזו חנות וחודש לעדכן?</h2>
+        </div>
+        <div class="setup-grid">
+          <label>
+            <span>חנות</span>
+            <select id="storeSelect"></select>
+          </label>
+          <label>
+            <span>חודש לדוח</span>
+            <input id="monthName" type="text" value="יולי 2026" placeholder="יולי 2026">
+          </label>
+          <label>
+            <span>קוד חודש</span>
+            <input id="monthKey" type="text" value="2026-07" placeholder="2026-07">
+          </label>
+          <label>
+            <span>חודש קצר בדרופדאון</span>
+            <input id="monthShort" type="text" value="יולי 26" placeholder="יולי 26">
+          </label>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-heading">
+          <span class="section-number">02</span>
+          <h2>קובץ הנתונים הקיים</h2>
+        </div>
+        <textarea id="jsonInput" spellcheck="false" aria-label="תוכן report-data.json"></textarea>
+        <div class="actions">
+          <button class="button secondary" id="loadCurrent" type="button">טעינת הנתונים הנוכחיים</button>
+          <button class="button secondary" id="formatJson" type="button">סידור JSON</button>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-heading">
+          <span class="section-number">03</span>
+          <h2>נתוני החודש</h2>
+        </div>
+        <div class="monthly-inputs">
+          <label>
+            <span>CSV מ־Ads Manager</span>
+            <input id="campaignsCsv" type="file" accept=".csv,text/csv">
+          </label>
+          <label>
+            <span>מה עשינו החודש?</span>
+            <textarea id="summaryText" class="small-textarea" placeholder="כל שורה תהפוך לבולט&#10;עלה קמפיין רכיבות מבחן&#10;פורסם פוסט אורגני בעמוד החנות"></textarea>
+          </label>
+        </div>
+
+        <div class="organic-form">
+          <article>
+            <h3>Facebook</h3>
+            <label><span>עוקבים חדשים</span><input data-organic="facebook.newFollowers" type="number"></label>
+            <label><span>חשיפה אורגנית</span><input data-organic="facebook.organicReach" type="number"></label>
+            <label><span>אינטראקציות</span><input data-organic="facebook.interactions" type="number"></label>
+            <label><span>ביקורים בעמוד</span><input data-organic="facebook.pageVisits" type="number"></label>
+            <label><span>הודעות</span><input data-organic="facebook.messages" type="number"></label>
+          </article>
+          <article>
+            <h3>Instagram</h3>
+            <label><span>עוקבים חדשים</span><input data-organic="instagram.newFollowers" type="number"></label>
+            <label><span>חשיפה אורגנית</span><input data-organic="instagram.organicReach" type="number"></label>
+            <label><span>אינטראקציות</span><input data-organic="instagram.interactions" type="number"></label>
+            <label><span>ביקורים בפרופיל</span><input data-organic="instagram.profileVisits" type="number"></label>
+            <label><span>הודעות</span><input data-organic="instagram.messages" type="number"></label>
+          </article>
+        </div>
+
+        <details class="advanced-import">
+          <summary>ייבוא מתקדם מכמה חנויות בקובץ אחד</summary>
+          <div class="csv-grid">
+          <label>
+            <span>Facebook CSV עם storeId</span>
+            <input id="facebookCsv" type="file" accept=".csv,text/csv">
+          </label>
+          <label>
+            <span>Instagram CSV עם storeId</span>
+            <input id="instagramCsv" type="file" accept=".csv,text/csv">
+          </label>
+          <label>
+            <span>Summary CSV עם storeId</span>
+            <input id="summaryCsv" type="file" accept=".csv,text/csv">
+          </label>
+          </div>
+        </details>
+
+        <div class="actions">
+          <button class="button primary" id="mergeCsv" type="button">יצירת report-data.json מעודכן</button>
+        </div>
+        <p class="hint">בזרימה הפשוטה אין צורך להוסיף שם חנות בתוך ה־CSV. בוחרים חנות וחודש למעלה, והקובץ נכנס לשם.</p>
+      </section>
+
+      <section class="section">
+        <div class="section-heading">
+          <span class="section-number">04</span>
+          <h2>מה לייצא מ־Ads Manager?</h2>
+        </div>
+        <div class="schema-grid">
+          <article>
+            <h3>עמודות מומלצות</h3>
+            <code>Campaign name, Objective, Amount spent, Impressions, Post engagements, Link clicks, Leads</code>
+          </article>
+          <article>
+            <h3>אם אתה מסדר ידנית</h3>
+            <code>name,goal,budget,impressions,interactions,clicks,leads</code>
+          </article>
+          <article>
+            <h3>תקציב</h3>
+            <code>Amount spent נכנס אצלנו לשדה budget ומוצג כ־₪</code>
+          </article>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

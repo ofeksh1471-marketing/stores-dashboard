@@ -1,0 +1,153 @@
+.import-layout {
+  width: min(1180px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 28px 0 56px;
+}
+
+textarea {
+  width: 100%;
+  min-height: 260px;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  direction: ltr;
+  resize: vertical;
+  color: var(--ink);
+  background: #fbfdfb;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.9rem;
+}
+
+.small-textarea {
+  min-height: 150px;
+  direction: rtl;
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+button {
+  border: 0;
+  cursor: pointer;
+  font: inherit;
+}
+
+.setup-grid,
+.monthly-inputs,
+.csv-grid,
+.organic-form,
+.schema-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.setup-grid label,
+.monthly-inputs label,
+.csv-grid label,
+.organic-form article,
+.schema-grid article {
+  display: grid;
+  gap: 10px;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--soft);
+}
+
+.setup-grid span,
+.monthly-inputs span,
+.csv-grid span,
+.organic-form h3,
+.organic-form span,
+.schema-grid h3 {
+  color: var(--black);
+  font-weight: 900;
+}
+
+input[type="file"],
+input[type="text"],
+input[type="number"] {
+  width: 100%;
+  min-height: 42px;
+  padding: 0 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--muted);
+  background: var(--white);
+  font: inherit;
+}
+
+.organic-form article {
+  align-content: start;
+}
+
+.organic-form label {
+  display: grid;
+  grid-template-columns: 1fr 120px;
+  gap: 12px;
+  align-items: center;
+}
+
+.organic-form h3 {
+  margin: 0 0 6px;
+  font-size: 1.25rem;
+}
+
+.advanced-import {
+  margin-top: 16px;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fbfdfb;
+}
+
+.advanced-import summary {
+  cursor: pointer;
+  color: var(--green-dark);
+  font-weight: 900;
+}
+
+.advanced-import .csv-grid {
+  margin-top: 14px;
+}
+
+.schema-grid code {
+  display: block;
+  overflow-x: auto;
+  padding: 12px;
+  border-radius: 8px;
+  background: var(--white);
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+.hint {
+  margin: 14px 0 0;
+  color: var(--muted);
+  font-weight: 800;
+}
+
+@media (max-width: 680px) {
+  .import-layout {
+    width: min(100% - 20px, 1180px);
+  }
+
+  .setup-grid,
+  .monthly-inputs,
+  .csv-grid,
+  .organic-form,
+  .schema-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .organic-form label {
+    grid-template-columns: 1fr;
+  }
+}
