@@ -38,16 +38,29 @@ data/report-data.json
 http://localhost:8062/tools/import.html
 ```
 
-הכלי טוען את ה־JSON הקיים, מקבל קבצי CSV, ומוריד קובץ `report-data.json` מעודכן. אחרי ההורדה מחליפים את הקובץ הישן שבתיקיית `data`.
+הכלי טוען את ה־JSON הקיים, ואז בוחרים חנות וחודש. אפשר להעלות CSV מ־Ads Manager, להדביק את הסיכום החודשי, ולהכניס ידנית את המספרים מה־Insights של Facebook ו־Instagram. בסוף הכלי מוריד קובץ `report-data.json` מעודכן. אחרי ההורדה מחליפים את הקובץ הישן שבתיקיית `data`.
 
 ## CSV מומלץ
 
-`campaigns.csv`
+בזרימה הפשוטה אין צורך בעמודות `storeId`, `month` או `monthKey` בתוך ה־CSV. בוחרים אותן במסך הייבוא.
+
+`campaigns.csv` מ־Ads Manager יכול לכלול עמודות באנגלית:
 
 ```csv
-storeId,monthKey,month,name,goal,budget,impressions,interactions,clicks,leads
-bikecare,2026-06,יוני 2026,רכיבות מבחן ORBEA,פניות,300,8200,420,165,12
+Campaign name,Objective,Amount spent,Impressions,Post engagements,Link clicks,Leads
+רכיבות מבחן ORBEA,פניות,300,8200,420,165,12
 ```
+
+או עמודות מסודרות ידנית:
+
+```csv
+name,goal,budget,impressions,interactions,clicks,leads
+רכיבות מבחן ORBEA,פניות,300,8200,420,165,12
+```
+
+`Amount spent` נכנס לשדה `budget` ומוצג באתר כתקציב בשקלים.
+
+אפשרות מתקדמת: אם רוצים לעדכן כמה חנויות בקובץ אחד, מוסיפים לכל שורה `storeId`, `monthKey` ו־`month`.
 
 `facebook.csv`
 
@@ -61,13 +74,6 @@ bikecare,2026-06,יוני 2026,8,4200,190,76,3
 ```csv
 storeId,monthKey,month,newFollowers,organicReach,interactions,profileVisits,messages
 bikecare,2026-06,יוני 2026,10,6800,340,145,5
-```
-
-`summary.csv`
-
-```csv
-storeId,monthKey,month,summaryBullets
-bikecare,2026-06,יוני 2026,עלה קמפיין רכיבות מבחן; פורסם פוסט אורגני בעמוד החנות
 ```
 
 ## הוספת חודש חדש
