@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ייבוא CSV | RECYCLES</title>
+    <link rel="stylesheet" href="/assets/styles.css">
+    <link rel="stylesheet" href="/tools/import.css">
+    <script src="/tools/import.js" defer></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="/reports/">
+        <img src="/assets/logos/recycles-logo.png" alt="RECYCLES">
+      </a>
+      <a class="button secondary" href="/reports/">חזרה לדוחות</a>
+    </header>
+
+    <main class="import-layout">
+      <section class="admin-hero">
+        <p class="eyebrow">כלי ניהול פנימי</p>
+        <h1>ייבוא נתוני CSV</h1>
+      </section>
+
+      <section class="section">
+        <div class="section-heading">
+          <span class="section-number">01</span>
+          <h2>קובץ הנתונים הקיים</h2>
+        </div>
+        <textarea id="jsonInput" spellcheck="false" aria-label="תוכן report-data.json"></textarea>
+        <div class="actions">
+          <button class="button secondary" id="loadCurrent" type="button">טעינת הנתונים הנוכחיים</button>
+          <button class="button secondary" id="formatJson" type="button">סידור JSON</button>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-heading">
+          <span class="section-number">02</span>
+          <h2>קבצי CSV חודשיים</h2>
+        </div>
+        <div class="csv-grid">
+          <label>
+            <span>קמפיינים ממומנים</span>
+            <input id="campaignsCsv" type="file" accept=".csv,text/csv">
+          </label>
+          <label>
+            <span>Facebook אורגני</span>
+            <input id="facebookCsv" type="file" accept=".csv,text/csv">
+          </label>
+          <label>
+            <span>Instagram אורגני</span>
+            <input id="instagramCsv" type="file" accept=".csv,text/csv">
+          </label>
+          <label>
+            <span>סיכום חודשי</span>
+            <input id="summaryCsv" type="file" accept=".csv,text/csv">
+          </label>
+        </div>
+        <div class="actions">
+          <button class="button primary" id="mergeCsv" type="button">מיזוג והורדת JSON</button>
+        </div>
+        <p class="hint">כל CSV צריך לכלול <code>storeId</code> ו־<code>month</code>. מומלץ להשתמש ב־<code>monthKey</code> בפורמט <code>2026-06</code>.</p>
+      </section>
+
+      <section class="section">
+        <div class="section-heading">
+          <span class="section-number">03</span>
+          <h2>מבנה עמודות מומלץ</h2>
+        </div>
+        <div class="schema-grid">
+          <article>
+            <h3>campaigns.csv</h3>
+            <code>storeId,monthKey,month,name,goal,budget,impressions,interactions,clicks,leads</code>
+          </article>
+          <article>
+            <h3>facebook.csv</h3>
+            <code>storeId,monthKey,month,newFollowers,organicReach,interactions,pageVisits,messages</code>
+          </article>
+          <article>
+            <h3>instagram.csv</h3>
+            <code>storeId,monthKey,month,newFollowers,organicReach,interactions,profileVisits,messages</code>
+          </article>
+          <article>
+            <h3>summary.csv</h3>
+            <code>storeId,monthKey,month,summaryBullets</code>
+          </article>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

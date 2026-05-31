@@ -1,0 +1,256 @@
+{
+  "brand": {
+    "name": "RECYCLES",
+    "logo": "/assets/logos/recycles-logo.png"
+  },
+  "stores": [
+    {
+      "storeId": "bikecare",
+      "slug": "bikecare-7g2k4",
+      "storeName": "BIKECARE",
+      "storeLogo": "/assets/logos/bikecare.png",
+      "reports": [
+        {
+          "month": "יוני 2026",
+          "monthShort": "יוני 26",
+          "monthKey": "2026-06",
+          "sortKey": "2026-06",
+          "summaryBullets": [
+            "עלה קמפיין רכיבות מבחן",
+            "פורסם פוסט אורגני בעמוד החנות",
+            "החנות הופיעה בניוזלטר RECYCLES",
+            "עלה קידום דרך עמוד ORBEA ישראל"
+          ],
+          "campaigns": [
+            {
+              "name": "רכיבות מבחן ORBEA",
+              "goal": "פניות",
+              "budget": 300,
+              "impressions": 8200,
+              "interactions": 420,
+              "clicks": 165,
+              "leads": 12
+            }
+          ],
+          "monthlyTotals": {
+            "totalBudget": 300,
+            "paidImpressions": 8200,
+            "interactions": 420,
+            "clicks": 165,
+            "leads": 12,
+            "newFollowers": 18
+          },
+          "organic": {
+            "facebook": {
+              "newFollowers": 8,
+              "organicReach": 4200,
+              "interactions": 190,
+              "pageVisits": 76,
+              "messages": 3
+            },
+            "instagram": {
+              "newFollowers": 10,
+              "organicReach": 6800,
+              "interactions": 340,
+              "profileVisits": 145,
+              "messages": 5
+            }
+          }
+        }
+      ]
+    },
+    {
+      "storeId": "einhorn",
+      "slug": "einhorn-9x1m8",
+      "storeName": "EINHORN",
+      "storeLogo": "/assets/logos/einhorn.png",
+      "reports": [
+        {
+          "month": "יוני 2026",
+          "monthShort": "יוני 26",
+          "monthKey": "2026-06",
+          "sortKey": "2026-06",
+          "summaryBullets": [
+            "פורסם פוסט אורגני בעמוד החנות",
+            "עלה קידום תנועה לעמוד החנות",
+            "החנות קיבלה חשיפה דרך פעילות RECYCLES"
+          ],
+          "campaigns": [
+            {
+              "name": "קידום חנות יוני",
+              "goal": "קליקים",
+              "budget": 250,
+              "impressions": 6400,
+              "interactions": 280,
+              "clicks": 138,
+              "leads": 6
+            }
+          ],
+          "monthlyTotals": {
+            "totalBudget": 250,
+            "paidImpressions": 6400,
+            "interactions": 280,
+            "clicks": 138,
+            "leads": 6,
+            "newFollowers": 12
+          },
+          "organic": {
+            "facebook": {
+              "newFollowers": 5,
+              "organicReach": 3100,
+              "interactions": 120,
+              "pageVisits": 48,
+              "messages": 2
+            },
+            "instagram": {
+              "newFollowers": 7,
+              "organicReach": 4100,
+              "interactions": 180,
+              "profileVisits": 91,
+              "messages": 3
+            }
+          }
+        }
+      ]
+    },
+    {
+      "storeId": "rimon",
+      "slug": "rimon-5q8t2",
+      "storeName": "RIMON",
+      "storeLogo": "/assets/logos/rimon-bikes.png",
+      "reports": [
+        {
+          "month": "יוני 2026",
+          "monthShort": "יוני 26",
+          "monthKey": "2026-06",
+          "sortKey": "2026-06",
+          "summaryBullets": [
+            "עלה פוסט אורגני בעמוד החנות",
+            "החנות הופיעה בתוכן החודשי של RECYCLES"
+          ],
+          "campaigns": [],
+          "monthlyTotals": {
+            "totalBudget": 0,
+            "paidImpressions": 0,
+            "interactions": 132,
+            "clicks": 0,
+            "leads": 0,
+            "newFollowers": 9
+          },
+          "organic": {
+            "facebook": {
+              "newFollowers": 4,
+              "organicReach": 2200,
+              "interactions": 82,
+              "pageVisits": 34,
+              "messages": 1
+            },
+            "instagram": {
+              "newFollowers": 5,
+              "organicReach": 2900,
+              "interactions": 50,
+              "profileVisits": 58,
+              "messages": 2
+            }
+          }
+        }
+      ]
+    },
+    {
+      "storeId": "tobike",
+      "slug": "tobike-a91x7",
+      "storeName": "TOBIKE",
+      "storeLogo": "/assets/logos/two-bike.png",
+      "reports": [
+        {
+          "month": "יוני 2026",
+          "monthShort": "יוני 26",
+          "monthKey": "2026-06",
+          "sortKey": "2026-06",
+          "summaryBullets": [
+            "עלה קמפיין פניות מקומי",
+            "פורסם פוסט אורגני בעמוד החנות"
+          ],
+          "campaigns": [
+            {
+              "name": "פניות לחנות",
+              "goal": "פניות",
+              "budget": 300,
+              "impressions": 7700,
+              "interactions": 315,
+              "clicks": 122,
+              "leads": 9
+            }
+          ],
+          "monthlyTotals": {
+            "totalBudget": 300,
+            "paidImpressions": 7700,
+            "interactions": 315,
+            "clicks": 122,
+            "leads": 9,
+            "newFollowers": 14
+          },
+          "organic": {
+            "facebook": {
+              "newFollowers": 6,
+              "organicReach": 3650,
+              "interactions": 140,
+              "pageVisits": 52,
+              "messages": 2
+            },
+            "instagram": {
+              "newFollowers": 8,
+              "organicReach": 5000,
+              "interactions": 210,
+              "profileVisits": 104,
+              "messages": 4
+            }
+          }
+        }
+      ]
+    },
+    {
+      "storeId": "217",
+      "slug": "217-k4p7d",
+      "storeName": "217",
+      "storeLogo": "/assets/logos/217.png",
+      "reports": [
+        {
+          "month": "יוני 2026",
+          "monthShort": "יוני 26",
+          "monthKey": "2026-06",
+          "sortKey": "2026-06",
+          "summaryBullets": [
+            "פורסם פוסט אורגני בעמוד החנות",
+            "החנות הופיעה בניוזלטר RECYCLES"
+          ],
+          "campaigns": [],
+          "monthlyTotals": {
+            "totalBudget": 0,
+            "paidImpressions": 0,
+            "interactions": 96,
+            "clicks": 0,
+            "leads": 0,
+            "newFollowers": 7
+          },
+          "organic": {
+            "facebook": {
+              "newFollowers": 3,
+              "organicReach": 1850,
+              "interactions": 58,
+              "pageVisits": 27,
+              "messages": 1
+            },
+            "instagram": {
+              "newFollowers": 4,
+              "organicReach": 2400,
+              "interactions": 38,
+              "profileVisits": 41,
+              "messages": 1
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
