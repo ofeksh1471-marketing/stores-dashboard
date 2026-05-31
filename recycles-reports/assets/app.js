@@ -1,4 +1,4 @@
-const DATA_URL = "/data/report-data.json";
+const BRAND_LOGO = "/assets/logos/recycles-logo.png";
 
 const metricLabels = {
   totalBudget: "תקציב כולל",
@@ -29,30 +29,23 @@ init();
 
 async function init() {
   try {
-    const response = await fetch(DATA_URL);
-    if (!response.ok) throw new Error("Data file could not be loaded");
-    const data = await response.json();
     const slug = getSlug();
 
     if (!slug) {
-      renderAdmin(data);
+      renderPublicHome();
       return;
     }
 
-    const store = data.stores.find((item) => item.slug === slug);
-    if (!store) {
-      renderMissing(data);
+    const response = await fetch(`/data/reports/${slug}.json`);
+    if (!response.ok) {
+      renderMissing();
       return;
     }
 
-    renderStore(data, store);
+    const data = await response.json();
+    renderStore(data, data.store);
   } catch (error) {
-    app.innerHTML = `
-      <main class="empty-state">
-        <h1>לא ניתן לטעון את הדוחות</h1>
-        <p>בדקו שקובץ הנתונים נמצא בנתיב <code>${DATA_URL}</code>.</p>
-      </main>
-    `;
+    renderMissing();
     console.error(error);
   }
 }
@@ -63,43 +56,27 @@ function getSlug() {
   return parts[1] || "";
 }
 
-function renderAdmin(data) {
-  document.title = "ניהול דוחות | RECYCLES";
+function renderPublicHome() {
+  document.title = "דוחות חנויות | RECYCLES";
   app.innerHTML = `
     <header class="topbar">
       <a class="brand" href="/reports/">
-        <img src="${data.brand.logo}" alt="RECYCLES">
+        <img src="${BRAND_LOGO}" alt="RECYCLES">
       </a>
-      <a class="button secondary" href="/tools/import.html">ייבוא CSV</a>
     </header>
-    <main class="admin-layout">
-      <section class="admin-hero">
-        <p class="eyebrow">דף ניהול פנימי</p>
-        <h1>דוחות חודשיים לחנויות RECYCLES</h1>
-      </section>
-      <section class="store-grid" aria-label="רשימת חנויות">
-        ${data.stores.map((store) => `
-          <a class="store-card" href="/reports/${store.slug}/">
-            <span class="store-logo-frame">
-              <img src="${store.storeLogo}" alt="">
-            </span>
-            <span>
-              <strong>${store.storeName}</strong>
-              <small>${store.reports.length ? store.reports[0].monthShort : "אין דוחות"}</small>
-            </span>
-          </a>
-        `).join("")}
-      </section>
+    <main class="empty-state">
+      <img class="empty-logo" src="${BRAND_LOGO}" alt="RECYCLES">
+      <h1>דוח חודשי לחנויות RECYCLES</h1>
+      <p>יש לפתוח את הקישור האישי שנשלח לחנות.</p>
     </main>
   `;
 }
 
-function renderMissing(data) {
+function renderMissing() {
   app.innerHTML = `
     <main class="empty-state">
-      <img class="empty-logo" src="${data.brand.logo}" alt="RECYCLES">
+      <img class="empty-logo" src="${BRAND_LOGO}" alt="RECYCLES">
       <h1>לא נמצא דוח בכתובת הזו</h1>
-      <a class="button primary" href="/reports/">חזרה לרשימת החנויות</a>
     </main>
   `;
 }
@@ -236,6 +213,7 @@ function renderOrganicCard(title, metrics, keys) {
   return `
     <article class="organic-card">
       <h3>${title}</h3>
+      ${metrics.image ? `<img class="organic-screenshot" src="${metrics.image}" alt="צילום מסך ${title}">` : ""}
       <dl>
         ${keys.map((key) => `
           <div>

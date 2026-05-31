@@ -1,0 +1,61 @@
+{
+  "brand": {
+    "name": "RECYCLES",
+    "logo": "/assets/logos/recycles-logo.png"
+  },
+  "store": {
+    "storeId": "bikecare",
+    "slug": "bikecare-7g2k4",
+    "storeName": "BIKECARE",
+    "storeLogo": "/assets/logos/bikecare.png",
+    "reports": [
+      {
+        "month": "יוני 2026",
+        "monthShort": "יוני 26",
+        "monthKey": "2026-06",
+        "sortKey": "2026-06",
+        "summaryBullets": [
+          "עלה קמפיין רכיבות מבחן",
+          "פורסם פוסט אורגני בעמוד החנות",
+          "החנות הופיעה בניוזלטר RECYCLES",
+          "עלה קידום דרך עמוד ORBEA ישראל"
+        ],
+        "campaigns": [
+          {
+            "name": "רכיבות מבחן ORBEA",
+            "goal": "פניות",
+            "budget": 300,
+            "impressions": 8200,
+            "interactions": 420,
+            "clicks": 165,
+            "leads": 12
+          }
+        ],
+        "monthlyTotals": {
+          "totalBudget": 300,
+          "paidImpressions": 8200,
+          "interactions": 420,
+          "clicks": 165,
+          "leads": 12,
+          "newFollowers": 18
+        },
+        "organic": {
+          "facebook": {
+            "newFollowers": 8,
+            "organicReach": 4200,
+            "interactions": 190,
+            "pageVisits": 76,
+            "messages": 3
+          },
+          "instagram": {
+            "newFollowers": 10,
+            "organicReach": 6800,
+            "interactions": 340,
+            "profileVisits": 145,
+            "messages": 5
+          }
+        }
+      }
+    ]
+  }
+}

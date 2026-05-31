@@ -1,81 +1,49 @@
-# RECYCLES monthly reports
+# RECYCLES public reports
 
-מיני־סייט סטטי לדוחות חודשיים של חנויות RECYCLES.
+זהו האתר הציבורי לחנויות בלבד.
 
-## הרצה מקומית
+## מה יש כאן
 
-מתוך תיקיית הפרויקט:
+- עמוד אישי לכל חנות תחת `/reports/store-slug/`
+- קובץ נתונים נפרד לכל חנות תחת `data/reports/`
+- אין דף ניהול ציבורי
+- אין כלי ייבוא CSV ציבורי
+- אין `report-data.json` אחד שמכיל את כל החנויות
 
-```bash
-python3 -m http.server 8062
-```
+## למה זה חשוב
 
-ואז לפתוח:
-
-```text
-http://localhost:8062/reports/
-```
-
-## כתובות קיימות
-
-- `http://localhost:8062/reports/bikecare-7g2k4/`
-- `http://localhost:8062/reports/einhorn-9x1m8/`
-- `http://localhost:8062/reports/rimon-5q8t2/`
-- `http://localhost:8062/reports/tobike-a91x7/`
-- `http://localhost:8062/reports/217-k4p7d/`
-
-## עדכון נתונים
-
-מקור הנתונים המרכזי נמצא כאן:
+אם חנות מוחקת את סוף הכתובת ונכנסת ל:
 
 ```text
-data/report-data.json
+/reports/
 ```
 
-אפשר לעדכן אותו ידנית, או להשתמש בכלי:
+היא לא תראה רשימת חנויות. היא תראה רק הודעה לפתוח את הקישור האישי שלה.
+
+כל עמוד חנות טוען רק את הקובץ שלו, לדוגמה:
 
 ```text
-http://localhost:8062/tools/import.html
+data/reports/bikecare-7g2k4.json
 ```
 
-הכלי טוען את ה־JSON הקיים, ואז בוחרים חנות וחודש. אפשר להעלות CSV מ־Ads Manager, להדביק את הסיכום החודשי, ולהכניס ידנית את המספרים מה־Insights של Facebook ו־Instagram. בסוף הכלי מוריד קובץ `report-data.json` מעודכן. אחרי ההורדה מחליפים את הקובץ הישן שבתיקיית `data`.
+ולא קובץ אחד עם כל נתוני הרשת.
 
-## CSV מומלץ
+## עדכון חודשי
 
-בזרימה הפשוטה אין צורך בעמודות `storeId`, `month` או `monthKey` בתוך ה־CSV. בוחרים אותן במסך הייבוא.
+את כלי הניהול והייבוא שומרים בנפרד בתיקייה:
 
-`campaigns.csv` מ־Ads Manager יכול לכלול עמודות באנגלית:
-
-```csv
-Campaign name,Objective,Amount spent,Impressions,Post engagements,Link clicks,Leads
-רכיבות מבחן ORBEA,פניות,300,8200,420,165,12
+```text
+recycles-admin-private
 ```
 
-או עמודות מסודרות ידנית:
+שם אפשר להכין נתונים, ואז לפרסם לאתר הציבורי רק את קובצי החנות הרלוונטיים מתוך:
 
-```csv
-name,goal,budget,impressions,interactions,clicks,leads
-רכיבות מבחן ORBEA,פניות,300,8200,420,165,12
+```text
+data/reports/
 ```
 
-`Amount spent` נכנס לשדה `budget` ומוצג באתר כתקציב בשקלים.
+## דוגמת לינק לחנות
 
-אפשרות מתקדמת: אם רוצים לעדכן כמה חנויות בקובץ אחד, מוסיפים לכל שורה `storeId`, `monthKey` ו־`month`.
-
-`facebook.csv`
-
-```csv
-storeId,monthKey,month,newFollowers,organicReach,interactions,pageVisits,messages
-bikecare,2026-06,יוני 2026,8,4200,190,76,3
+```text
+https://YOUR-SITE.netlify.app/reports/bikecare-7g2k4/
 ```
-
-`instagram.csv`
-
-```csv
-storeId,monthKey,month,newFollowers,organicReach,interactions,profileVisits,messages
-bikecare,2026-06,יוני 2026,10,6800,340,145,5
-```
-
-## הוספת חודש חדש
-
-כאשר מזינים `monthKey` חדש, לדוגמה `2026-07`, הכלי מוסיף דוח חדש ולא מוחק חודשים קודמים. הדרופדאון בעמוד החנות יציג את כל החודשים הקיימים.

@@ -1,0 +1,31 @@
+{
+  "brand": {
+    "name": "RECYCLES",
+    "logo": "/assets/logos/recycles-logo.png"
+  },
+  "store": {
+    "storeId": "ran-ofan",
+    "slug": "ran-ofan-b8m5c",
+    "storeName": "RAN OFAN",
+    "storeLogo": "/assets/logos/ran-ofan.png",
+    "reports": [
+      {
+        "month": "יוני 2026",
+        "monthShort": "יוני 26",
+        "monthKey": "2026-06",
+        "sortKey": "2026-06",
+        "summaryBullets": [],
+        "campaigns": [],
+        "monthlyTotals": {
+          "totalBudget": 0,
+          "paidImpressions": 0,
+          "interactions": 0,
+          "clicks": 0,
+          "leads": 0,
+          "newFollowers": 0
+        },
+        "organic": {}
+      }
+    ]
+  }
+}

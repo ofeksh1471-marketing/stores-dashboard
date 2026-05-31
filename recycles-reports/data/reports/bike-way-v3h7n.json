@@ -1,0 +1,31 @@
+{
+  "brand": {
+    "name": "RECYCLES",
+    "logo": "/assets/logos/recycles-logo.png"
+  },
+  "store": {
+    "storeId": "bike-way",
+    "slug": "bike-way-v3h7n",
+    "storeName": "BIKE WAY",
+    "storeLogo": "/assets/logos/bike-way.png",
+    "reports": [
+      {
+        "month": "יוני 2026",
+        "monthShort": "יוני 26",
+        "monthKey": "2026-06",
+        "sortKey": "2026-06",
+        "summaryBullets": [],
+        "campaigns": [],
+        "monthlyTotals": {
+          "totalBudget": 0,
+          "paidImpressions": 0,
+          "interactions": 0,
+          "clicks": 0,
+          "leads": 0,
+          "newFollowers": 0
+        },
+        "organic": {}
+      }
+    ]
+  }
+}

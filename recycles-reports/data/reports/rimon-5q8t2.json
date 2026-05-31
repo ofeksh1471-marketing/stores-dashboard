@@ -1,0 +1,49 @@
+{
+  "brand": {
+    "name": "RECYCLES",
+    "logo": "/assets/logos/recycles-logo.png"
+  },
+  "store": {
+    "storeId": "rimon",
+    "slug": "rimon-5q8t2",
+    "storeName": "RIMON",
+    "storeLogo": "/assets/logos/rimon-bikes.png",
+    "reports": [
+      {
+        "month": "יוני 2026",
+        "monthShort": "יוני 26",
+        "monthKey": "2026-06",
+        "sortKey": "2026-06",
+        "summaryBullets": [
+          "עלה פוסט אורגני בעמוד החנות",
+          "החנות הופיעה בתוכן החודשי של RECYCLES"
+        ],
+        "campaigns": [],
+        "monthlyTotals": {
+          "totalBudget": 0,
+          "paidImpressions": 0,
+          "interactions": 132,
+          "clicks": 0,
+          "leads": 0,
+          "newFollowers": 9
+        },
+        "organic": {
+          "facebook": {
+            "newFollowers": 4,
+            "organicReach": 2200,
+            "interactions": 82,
+            "pageVisits": 34,
+            "messages": 1
+          },
+          "instagram": {
+            "newFollowers": 5,
+            "organicReach": 2900,
+            "interactions": 50,
+            "profileVisits": 58,
+            "messages": 2
+          }
+        }
+      }
+    ]
+  }
+}
