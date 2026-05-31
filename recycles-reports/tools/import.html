@@ -25,6 +25,31 @@
       <section class="section">
         <div class="section-heading">
           <span class="section-number">01</span>
+          <h2>לאיזו חנות וחודש לעדכן?</h2>
+        </div>
+        <div class="setup-grid">
+          <label>
+            <span>חנות</span>
+            <select id="storeSelect"></select>
+          </label>
+          <label>
+            <span>חודש לדוח</span>
+            <input id="monthName" type="text" value="יולי 2026" placeholder="יולי 2026">
+          </label>
+          <label>
+            <span>קוד חודש</span>
+            <input id="monthKey" type="text" value="2026-07" placeholder="2026-07">
+          </label>
+          <label>
+            <span>חודש קצר בדרופדאון</span>
+            <input id="monthShort" type="text" value="יולי 26" placeholder="יולי 26">
+          </label>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-heading">
+          <span class="section-number">02</span>
           <h2>קובץ הנתונים הקיים</h2>
         </div>
         <textarea id="jsonInput" spellcheck="false" aria-label="תוכן report-data.json"></textarea>
@@ -36,54 +61,80 @@
 
       <section class="section">
         <div class="section-heading">
-          <span class="section-number">02</span>
-          <h2>קבצי CSV חודשיים</h2>
+          <span class="section-number">03</span>
+          <h2>נתוני החודש</h2>
         </div>
-        <div class="csv-grid">
+        <div class="monthly-inputs">
           <label>
-            <span>קמפיינים ממומנים</span>
+            <span>CSV מ־Ads Manager</span>
             <input id="campaignsCsv" type="file" accept=".csv,text/csv">
           </label>
           <label>
-            <span>Facebook אורגני</span>
+            <span>מה עשינו החודש?</span>
+            <textarea id="summaryText" class="small-textarea" placeholder="כל שורה תהפוך לבולט&#10;עלה קמפיין רכיבות מבחן&#10;פורסם פוסט אורגני בעמוד החנות"></textarea>
+          </label>
+        </div>
+
+        <div class="organic-form">
+          <article>
+            <h3>Facebook</h3>
+            <label><span>עוקבים חדשים</span><input data-organic="facebook.newFollowers" type="number"></label>
+            <label><span>חשיפה אורגנית</span><input data-organic="facebook.organicReach" type="number"></label>
+            <label><span>אינטראקציות</span><input data-organic="facebook.interactions" type="number"></label>
+            <label><span>ביקורים בעמוד</span><input data-organic="facebook.pageVisits" type="number"></label>
+            <label><span>הודעות</span><input data-organic="facebook.messages" type="number"></label>
+          </article>
+          <article>
+            <h3>Instagram</h3>
+            <label><span>עוקבים חדשים</span><input data-organic="instagram.newFollowers" type="number"></label>
+            <label><span>חשיפה אורגנית</span><input data-organic="instagram.organicReach" type="number"></label>
+            <label><span>אינטראקציות</span><input data-organic="instagram.interactions" type="number"></label>
+            <label><span>ביקורים בפרופיל</span><input data-organic="instagram.profileVisits" type="number"></label>
+            <label><span>הודעות</span><input data-organic="instagram.messages" type="number"></label>
+          </article>
+        </div>
+
+        <details class="advanced-import">
+          <summary>ייבוא מתקדם מכמה חנויות בקובץ אחד</summary>
+          <div class="csv-grid">
+          <label>
+            <span>Facebook CSV עם storeId</span>
             <input id="facebookCsv" type="file" accept=".csv,text/csv">
           </label>
           <label>
-            <span>Instagram אורגני</span>
+            <span>Instagram CSV עם storeId</span>
             <input id="instagramCsv" type="file" accept=".csv,text/csv">
           </label>
           <label>
-            <span>סיכום חודשי</span>
+            <span>Summary CSV עם storeId</span>
             <input id="summaryCsv" type="file" accept=".csv,text/csv">
           </label>
-        </div>
+          </div>
+        </details>
+
         <div class="actions">
-          <button class="button primary" id="mergeCsv" type="button">מיזוג והורדת JSON</button>
+          <button class="button primary" id="mergeCsv" type="button">יצירת report-data.json מעודכן</button>
         </div>
-        <p class="hint">כל CSV צריך לכלול <code>storeId</code> ו־<code>month</code>. מומלץ להשתמש ב־<code>monthKey</code> בפורמט <code>2026-06</code>.</p>
+        <p class="hint">בזרימה הפשוטה אין צורך להוסיף שם חנות בתוך ה־CSV. בוחרים חנות וחודש למעלה, והקובץ נכנס לשם.</p>
       </section>
 
       <section class="section">
         <div class="section-heading">
-          <span class="section-number">03</span>
-          <h2>מבנה עמודות מומלץ</h2>
+          <span class="section-number">04</span>
+          <h2>מה לייצא מ־Ads Manager?</h2>
         </div>
         <div class="schema-grid">
           <article>
-            <h3>campaigns.csv</h3>
-            <code>storeId,monthKey,month,name,goal,budget,impressions,interactions,clicks,leads</code>
+            <h3>עמודות מומלצות</h3>
+            <code>Campaign name, Objective, Amount spent, Impressions, Post engagements, Link clicks, Leads</code>
           </article>
           <article>
-            <h3>facebook.csv</h3>
-            <code>storeId,monthKey,month,newFollowers,organicReach,interactions,pageVisits,messages</code>
+            <h3>אם אתה מסדר ידנית</h3>
+            <code>name,goal,budget,impressions,interactions,clicks,leads</code>
           </article>
           <article>
-            <h3>instagram.csv</h3>
-            <code>storeId,monthKey,month,newFollowers,organicReach,interactions,profileVisits,messages</code>
-          </article>
-          <article>
-            <h3>summary.csv</h3>
-            <code>storeId,monthKey,month,summaryBullets</code>
+            <h3>תקציב</h3>
+            <code>Amount spent נכנס אצלנו לשדה budget ומוצג כ־₪</code>
           </article>
         </div>
       </section>

@@ -2,12 +2,9 @@ const jsonInput = document.querySelector("#jsonInput");
 const loadCurrent = document.querySelector("#loadCurrent");
 const formatJson = document.querySelector("#formatJson");
 const mergeCsv = document.querySelector("#mergeCsv");
+const storeSelect = document.querySelector("#storeSelect");
 
-loadCurrent.addEventListener("click", async () => {
-  const response = await fetch("/data/report-data.json");
-  const data = await response.json();
-  jsonInput.value = JSON.stringify(data, null, 2);
-});
+loadCurrent.addEventListener("click", loadCurrentData);
 
 formatJson.addEventListener("click", () => {
   const data = readJson();
@@ -16,23 +13,59 @@ formatJson.addEventListener("click", () => {
 
 mergeCsv.addEventListener("click", async () => {
   const data = readJson();
-  await mergeCampaigns(data, await readCsvFile("#campaignsCsv"));
-  await mergeOrganic(data, "facebook", await readCsvFile("#facebookCsv"));
-  await mergeOrganic(data, "instagram", await readCsvFile("#instagramCsv"));
-  await mergeSummary(data, await readCsvFile("#summaryCsv"));
+  const context = readContext();
+
+  const campaignRows = await readCsvFile("#campaignsCsv");
+  if (campaignRows.length) mergeCampaigns(data, campaignRows, context);
+
+  mergeSummaryText(data, context);
+  mergeOrganicForm(data, context);
+
+  mergeOrganic(data, "facebook", await readCsvFile("#facebookCsv"));
+  mergeOrganic(data, "instagram", await readCsvFile("#instagramCsv"));
+  mergeSummaryCsv(data, await readCsvFile("#summaryCsv"));
+
   recalculateTotals(data);
   downloadJson(data);
 });
 
-loadCurrent.click();
+loadCurrentData();
+
+async function loadCurrentData() {
+  const response = await fetch("/data/report-data.json");
+  const data = await response.json();
+  jsonInput.value = JSON.stringify(data, null, 2);
+  renderStores(data);
+}
+
+function renderStores(data) {
+  const selected = storeSelect.value;
+  storeSelect.innerHTML = data.stores
+    .map((store) => `<option value="${store.storeId}">${store.storeName}</option>`)
+    .join("");
+  if (selected && data.stores.some((store) => store.storeId === selected)) {
+    storeSelect.value = selected;
+  }
+}
 
 function readJson() {
   try {
-    return JSON.parse(jsonInput.value);
+    const data = JSON.parse(jsonInput.value);
+    renderStores(data);
+    return data;
   } catch (error) {
     alert("ה־JSON לא תקין. בדקו את קובץ הנתונים הקיים.");
     throw error;
   }
+}
+
+function readContext() {
+  return {
+    storeId: storeSelect.value,
+    month: document.querySelector("#monthName").value.trim(),
+    monthKey: document.querySelector("#monthKey").value.trim(),
+    monthShort: document.querySelector("#monthShort").value.trim()
+  };
 }
 
 async function readCsvFile(selector) {
@@ -83,27 +116,77 @@ function parseCsv(text) {
 function normalizeCell(value = "") {
   const clean = String(value).trim();
   if (clean === "") return "";
-  const number = Number(clean.replace(/,/g, ""));
-  return Number.isFinite(number) && !/[^\d,.-]/.test(clean) ? number : clean;
+  const number = Number(clean.replace(/,/g, "").replace(/[₪$]/g, ""));
+  return Number.isFinite(number) && !/[^\d,.$₪ -]/.test(clean) ? number : clean;
 }
 
-async function mergeCampaigns(data, rows) {
-  for (const row of rows) {
-    const report = getReport(data, row);
-    report.campaigns = report.campaigns || [];
-    report.campaigns.push({
-      name: row.name || "",
-      goal: row.goal || "",
-      budget: row.budget || 0,
-      impressions: row.impressions || 0,
-      interactions: row.interactions || 0,
-      clicks: row.clicks || 0,
-      leads: row.leads || 0
-    });
+function mergeCampaigns(data, rows, context) {
+  const groupedRows = rowsByReport(data, rows, context);
+
+  for (const { report, rows: reportRows } of groupedRows) {
+    report.campaigns = reportRows
+      .map(normalizeCampaignRow)
+      .filter((campaign) => campaign.name || campaign.budget || campaign.impressions || campaign.interactions || campaign.clicks || campaign.leads);
   }
 }
 
-async function mergeOrganic(data, channel, rows) {
+function rowsByReport(data, rows, context) {
+  const grouped = new Map();
+
+  for (const row of rows) {
+    const rowContext = {
+      storeId: row.storeId || context.storeId,
+      month: row.month || context.month,
+      monthKey: row.monthKey || context.monthKey,
+      monthShort: row.monthShort || context.monthShort
+    };
+    const report = getReport(data, rowContext);
+    const key = `${rowContext.storeId}__${rowContext.monthKey}`;
+    if (!grouped.has(key)) grouped.set(key, { report, rows: [] });
+    grouped.get(key).rows.push(row);
+  }
+
+  return [...grouped.values()];
+}
+
+function normalizeCampaignRow(row) {
+  return {
+    name: pick(row, ["name", "Campaign name", "Campaign Name", "Campaign", "שם קמפיין", "קמפיין"]),
+    goal: pick(row, ["goal", "Objective", "Objective name", "Result type", "Results indicator", "מטרה"]),
+    budget: pick(row, ["budget", "Amount spent", "Amount spent (ILS)", "Amount spent (₪)", "סכום שהוצא", "תקציב"]),
+    impressions: pick(row, ["impressions", "Impressions", "חשיפות"]),
+    interactions: pick(row, ["interactions", "Post engagements", "Engagements", "Page engagement", "אינטראקציות", "אינטרקציות"]),
+    clicks: pick(row, ["clicks", "Link clicks", "Clicks (all)", "Outbound clicks", "קליקים"]),
+    leads: pick(row, ["leads", "Leads", "Messaging conversations started", "New messaging conversations", "On-Facebook leads", "פניות"])
+  };
+}
+
+function mergeOrganicForm(data, context) {
+  const report = getReport(data, context);
+  const fields = [...document.querySelectorAll("[data-organic]")];
+  const hasAnyValue = fields.some((field) => field.value.trim() !== "");
+  if (!hasAnyValue) return;
+
+  report.organic = report.organic || {};
+  for (const field of fields) {
+    if (field.value.trim() === "") continue;
+    const [channel, key] = field.dataset.organic.split(".");
+    report.organic[channel] = report.organic[channel] || {};
+    report.organic[channel][key] = Number(field.value);
+  }
+}
+
+function mergeSummaryText(data, context) {
+  const text = document.querySelector("#summaryText").value.trim();
+  if (!text) return;
+  const report = getReport(data, context);
+  report.summaryBullets = text
+    .split(/\n/)
+    .map((item) => item.replace(/^[-•]\s*/, "").trim())
+    .filter(Boolean);
+}
+
+function mergeOrganic(data, channel, rows) {
   for (const row of rows) {
     const report = getReport(data, row);
     report.organic = report.organic || {};
@@ -118,7 +201,7 @@ async function mergeOrganic(data, channel, rows) {
   }
 }
 
-async function mergeSummary(data, rows) {
+function mergeSummaryCsv(data, rows) {
   for (const row of rows) {
     const report = getReport(data, row);
     report.summaryBullets = String(row.summaryBullets || "")
@@ -168,6 +251,13 @@ function recalculateTotals(data) {
       store.reports.sort((a, b) => String(b.sortKey || "").localeCompare(String(a.sortKey || "")));
     }
   }
+}
+
+function pick(row, keys) {
+  for (const key of keys) {
+    if (row[key] !== "" && row[key] !== null && row[key] !== undefined) return row[key];
+  }
+  return "";
 }
 
 function sum(rows, key) {
