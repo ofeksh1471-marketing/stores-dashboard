@@ -1,0 +1,59 @@
+{
+  "brand": {
+    "name": "RECYCLES",
+    "logo": "/assets/logos/recycles-logo.png"
+  },
+  "store": {
+    "storeId": "tobike",
+    "slug": "tobike",
+    "storeName": "ToBike",
+    "storeLogo": "/assets/logos/two-bike.png",
+    "reports": [
+      {
+        "month": "יוני 2026",
+        "monthShort": "יוני 26",
+        "monthKey": "2026-06",
+        "sortKey": "2026-06",
+        "summaryBullets": [
+          "עלה קמפיין פניות מקומי",
+          "פורסם פוסט אורגני בעמוד החנות"
+        ],
+        "campaigns": [
+          {
+            "name": "פניות לחנות",
+            "goal": "פניות",
+            "budget": 300,
+            "impressions": 7700,
+            "interactions": 315,
+            "clicks": 122,
+            "leads": 9
+          }
+        ],
+        "monthlyTotals": {
+          "totalBudget": 300,
+          "paidImpressions": 7700,
+          "interactions": 315,
+          "clicks": 122,
+          "leads": 9,
+          "newFollowers": 14
+        },
+        "organic": {
+          "facebook": {
+            "newFollowers": 6,
+            "organicReach": 3650,
+            "interactions": 140,
+            "pageVisits": 52,
+            "messages": 2
+          },
+          "instagram": {
+            "newFollowers": 8,
+            "organicReach": 5000,
+            "interactions": 210,
+            "profileVisits": 104,
+            "messages": 4
+          }
+        }
+      }
+    ]
+  }
+}

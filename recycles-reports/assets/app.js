@@ -3,7 +3,7 @@ const BRAND_LOGO = "/assets/logos/recycles-logo.png";
 const metricLabels = {
   totalBudget: "תקציב כולל",
   paidImpressions: "חשיפות ממומנות",
-  interactions: "אינטראקציות",
+  interactions: "אינטרקציות",
   clicks: "קליקים",
   leads: "פניות",
   newFollowers: "עוקבים חדשים",

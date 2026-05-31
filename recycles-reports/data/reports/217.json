@@ -1,0 +1,49 @@
+{
+  "brand": {
+    "name": "RECYCLES",
+    "logo": "/assets/logos/recycles-logo.png"
+  },
+  "store": {
+    "storeId": "217",
+    "slug": "217",
+    "storeName": "217",
+    "storeLogo": "/assets/logos/217.png",
+    "reports": [
+      {
+        "month": "יוני 2026",
+        "monthShort": "יוני 26",
+        "monthKey": "2026-06",
+        "sortKey": "2026-06",
+        "summaryBullets": [
+          "פורסם פוסט אורגני בעמוד החנות",
+          "החנות הופיעה בניוזלטר RECYCLES"
+        ],
+        "campaigns": [],
+        "monthlyTotals": {
+          "totalBudget": 0,
+          "paidImpressions": 0,
+          "interactions": 96,
+          "clicks": 0,
+          "leads": 0,
+          "newFollowers": 7
+        },
+        "organic": {
+          "facebook": {
+            "newFollowers": 3,
+            "organicReach": 1850,
+            "interactions": 58,
+            "pageVisits": 27,
+            "messages": 1
+          },
+          "instagram": {
+            "newFollowers": 4,
+            "organicReach": 2400,
+            "interactions": 38,
+            "profileVisits": 41,
+            "messages": 1
+          }
+        }
+      }
+    ]
+  }
+}
